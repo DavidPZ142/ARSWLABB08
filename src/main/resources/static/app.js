@@ -13,7 +13,7 @@ var app = (function () {
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
         ctx.beginPath();
-        ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
+        ctx.arc(point.x, point.y, 50, 0, 2 * Math.PI);
         ctx.stroke();
     };
     
@@ -38,12 +38,15 @@ var app = (function () {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/newpoint', function (eventbody) {
                 var theObject = JSON.parse(eventbody.body)
+                addPointToCanvas(theObject);
                 alert("Se agrego nuevo punto x:"+ theObject.x+" y: " + theObject.y)
                 
             });
         });
 
     };
+
+
     
     
 
@@ -59,7 +62,6 @@ var app = (function () {
         publishPoint: function(px,py){
             var pt=new Point(px,py);
             console.info("publishing point at "+pt);
-            addPointToCanvas(pt);
             stompClient.send("/topic/newpoint",{},JSON.stringify(pt))
 
         },
