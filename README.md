@@ -4,6 +4,9 @@
 
 ## Autores ✒
 
+David Pérez 
+Nicolas Camacho
+
 - Conectarse con un botón
 - publicar con eventos de mouse
 
